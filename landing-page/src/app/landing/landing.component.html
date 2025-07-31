@@ -200,29 +200,35 @@
 </section>
 
 <!-- REGISTRATION -->
+<!-- register.component.html -->
 <section id="register" class="registration-section py-5 bg-dark-gradient" style="position:relative;z-index:2;">
   <div class="container-xl">
     <div class="row justify-content-center">
       <div class="col-md-7 col-lg-5">
-        <form class="register-form px-4 py-5 glass-morph shadow-lg rounded-4 mx-auto">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form px-4 py-5 glass-morph shadow-lg rounded-4 mx-auto">
           <h2 class="text-center mb-4" style="color:#ffe100; letter-spacing:2px; font-family:'JetBrains Mono', monospace; font-weight:700;">REGISTER NOW</h2>
           <div class="mb-3">
-            <label for="firstName" class="form-label text-white" style="font-family:'JetBrains Mono', monospace;">First Name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+            <label for="firstName" class="form-label text-white">First Name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Enter your first name" required>
           </div>
           <div class="mb-3">
-            <label for="lastName" class="form-label text-white" style="font-family:'JetBrains Mono', monospace;">Last Name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+            <label for="lastName" class="form-label text-white">Last Name</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Enter your last name" required>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label text-white" style="font-family:'JetBrains Mono', monospace;">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+            <label for="email" class="form-label text-white">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email address" required>
           </div>
           <div class="mb-4">
-            <label for="password" class="form-label text-white" style="font-family:'JetBrains Mono', monospace;">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+            <label for="password" class="form-label text-white">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Create a password" required>
           </div>
-          <button type="submit" class="btn w-100 py-2 btn-accent fw-bold fs-5 shadow-sm rounded-3 transition">REGISTER</button>
+          <button type="submit" class="btn w-100 py-2 btn-accent fw-bold fs-5 shadow-sm rounded-3 transition"
+                  [disabled]="registerForm.invalid || loading">
+            {{ loading ? 'Registering...' : 'REGISTER' }}
+          </button>
+          <div *ngIf="successMsg" class="alert alert-success mt-3">{{successMsg}}</div>
+          <div *ngIf="errorMsg" class="alert alert-danger mt-3">{{errorMsg}}</div>
         </form>
       </div>
     </div>
