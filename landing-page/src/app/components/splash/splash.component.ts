@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-splash',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./splash.component.css']
 })
 export class SplashComponent {
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 5000); // 6000 milliseconds = 6 seconds
+  }
 
 }
